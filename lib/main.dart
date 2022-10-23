@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myshop/ui/products/edit_product_screen.dart';
 import 'ui/products/product_detail_screen.dart';
 import 'ui/products/products_manager.dart';
 import 'ui/products/product_overview_screen.dart';
@@ -51,12 +52,13 @@ class MyApp extends StatelessWidget {
           (ctx) => const UserProductsScreen(),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == ProductDetailScreen.routeName) {
-          final productId = settings.arguments as String;
+        if (settings.name == EditProductScreen.routeName) {
+          final productId = settings.arguments as String?;
           return MaterialPageRoute(
             builder: (ctx) {
-              return ProductDetailScreen(
-                ctx.read<ProductsManager>().findById(productId),
+              return EditProductScreen(
+                productId != null
+                ? ctx.read<ProductsManager>().findById(productId) : null,
               );
             },
           );

@@ -6,6 +6,8 @@ import '../shared/app_drawer.dart';
 
 import 'package:provider/provider.dart';
 
+import 'edit_product_screen.dart';
+
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
 
@@ -18,7 +20,7 @@ class UserProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Your Products'),
         actions: <Widget>[
-          buildAddButton(),
+          buildAddButton(context),
         ],
       ),
       drawer: const AppDrawer(),
@@ -47,11 +49,22 @@ class UserProductsScreen extends StatelessWidget {
     ) ;
   }
 
-  Widget buildAddButton() {
+  // Widget buildAddButton() {
+  //   return IconButton(
+  //     icon: const Icon(Icons.add),
+  //     onPressed: (){
+  //       print('Go to edit product screen');
+  //     },
+  //   );
+  // }
+
+  Widget buildAddButton(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.add),
-      onPressed: (){
-        print('Go to edit product screen');
+      onPressed: () {
+        Navigator.of(context).pushNamed(
+          EditProductScreen.routeName,
+        );
       },
     );
   }
